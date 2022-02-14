@@ -98,7 +98,7 @@
         alldata:[],
         total:0,
         getInfoData: {
-          limit: 1,
+          limit: 10,
           offset: 1,
           startDelTime: [],
           startStartTime:'',
@@ -157,7 +157,7 @@
     methods: {
       clearInput(){
         this.getInfoData = {
-          limit: 1,
+          limit: 10,
           offset: 1,
           startDelTime: [],
           startStartTime:'',
@@ -183,7 +183,7 @@
           for(let i = 0 ;i<this.alldata.length;i++){
             this.alldata[i]['往来帐日期'] = this.formatDate(this.alldata[i]['往来帐日期'],'-');
           }
-            this.tabData = this.alldata.slice(0,1)
+            this.tabData = this.alldata.slice(0,this.getInfoData.limit)
             this.total = this.alldata.length
             console.log(this.tabData.length);
 
@@ -219,11 +219,11 @@
         const date = time.getDate() ;
         return year + format + (month < 10 ? '0' + month : month) + format + (date < 10 ? '0' + date : date)
       },
-      saveHandler(){
-        var content = JSON.stringify(this.tabData);
-        var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-          saveAs(blob, "save.json");
-      },
     }
   }
 </script>
+<style scoped>
+.export-excel-wrapper{
+  margin-bottom: 10px;
+}
+</style>

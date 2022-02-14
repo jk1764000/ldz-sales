@@ -1,6 +1,6 @@
 // import Cookies from 'js-cookie'
 
-const TokenKey = 'jiesu_admin_token'
+const TokenKey = 'ldz_admin_token'
 
 export function getToken() {
   return sessionStorage.getItem(TokenKey)

@@ -13,14 +13,27 @@
         <el-input
           ref="loginname"
           v-model="loginForm.loginname"
-          placeholder="loginname"
+          placeholder="请输入企业账号"
           name="loginname"
           type="text"
           tabindex="1"
           auto-complete="on"
         />
       </el-form-item>
-
+      <el-form-item prop="loginperson">
+        <span class="svg-container">
+          <svg-icon icon-class="user" />
+        </span>
+        <el-input
+          ref="loginperson"
+          v-model="loginForm.loginperson"
+          placeholder="请输入个人账号"
+          name="loginperson"
+          type="text"
+          tabindex="1"
+          auto-complete="on"
+        />
+      </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon-class="password" />
@@ -30,7 +43,7 @@
           ref="password"
           v-model="loginForm.password"
           :type="passwordType"
-          placeholder="Password"
+          placeholder="请输入密码"
           name="password"
           tabindex="2"
           auto-complete="on"
@@ -63,9 +76,13 @@ export default {
     const validateUsername = (rule, value, callback) => {
       callback()
     }
+    const validateLoginperson = (rule, value, callback) => {
+      callback()
+    }
+    
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+      if (value.length < 4) {
+        callback(new Error('密码输入错误'))
       } else {
         callback()
       }
@@ -73,11 +90,13 @@ export default {
     return {
       loginForm: {
         loginname: '',
-        password: ''
+        password: '',
+        loginperson:'',
       },
       loginRules: {
         loginname: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }],
+        loginperson:[{ required: true, trigger: 'blur', validator: validateUsername }],
       },
       loading: false,
       passwordType: 'password',
@@ -107,9 +126,30 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          setToken('1111');
-          this.$router.push({ path: this.redirect || '/' })
-          this.loading = false
+          if(this.loginForm.loginname == "307814"){
+            if((this.loginForm.loginperson == '0' && this.loginForm.password =="sw123") || this.loginForm.loginperson == '1' && this.loginForm.password =="sw246"){
+              this.loading = false
+              setToken('1111');
+              sessionStorage.setItem('ldzloginname',this.loginForm.loginname);
+              sessionStorage.setItem('loginperson',this.loginForm.loginperson);
+              this.$router.push({ path: this.redirect || '/' })
+              
+            }else{
+              this.loading = false
+              this.$message({
+                message: '个人账号或密码错误',
+                type: 'error'
+              });
+            }
+            
+          }else{
+            this.loading = false
+            this.$message({
+              message: '企业账号错误',
+              type: 'error'
+            });
+          }
+          
 
           // login(this.loginForm).then((res)=>{
           //   if(res.code == "0"){
