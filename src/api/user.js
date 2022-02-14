@@ -1,12 +1,12 @@
 import request from '@/utils/request'
 
-export function login(data) {
-  return request({
-    url: '/sys/user/login',
-    method: 'get',
-    data
-  })
-}
+// export function login(data) {
+//   return request({
+//     url: '/sys/user/login',
+//     method: 'get',
+//     data
+//   })
+// }
 
 export function getInfo(token) {
   return request({

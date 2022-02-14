@@ -54,7 +54,7 @@
 
 <script>
 // import { validUsername } from '@/utils/validate'
-import {login} from "@/api/user"
+// import {login} from "@/api/user"
 import { setToken } from '@/utils/auth'
 
 export default {
@@ -107,13 +107,17 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          login(this.loginForm).then((res)=>{
-            if(res.code == "0"){
-                setToken('1111');
-                this.$router.push({ path: this.redirect || '/' })
-                this.loading = false
-              }
-            });
+          setToken('1111');
+          this.$router.push({ path: this.redirect || '/' })
+          this.loading = false
+
+          // login(this.loginForm).then((res)=>{
+          //   if(res.code == "0"){
+          //       setToken('1111');
+          //       this.$router.push({ path: this.redirect || '/' })
+          //       this.loading = false
+          //     }
+          //   });
         } else {
           console.log('error submit!!')
           return false
