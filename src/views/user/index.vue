@@ -2,9 +2,17 @@
   <div class="app-container">
     <commonForm :inline="true" :data="getInfoData" :formConfig="formConfig">
     </commonForm>
-    <el-upload action="" :auto-upload="false" :on-change="upload" :limit="1">
+    <JsonExcel
+      class = "export-excel-wrapper"
+      :data = "tabData"
+      :fields = "json_fields"
+      name = "销售退货.xls">
+      <!-- 上面可以自定义自己的样式，还可以引用其他组件button -->
+      <el-button type="primary" size="small">导出EXCEL</el-button>
+    </JsonExcel>
+    <!-- <el-upload action="" :auto-upload="false" :on-change="upload" :limit="1">
       <el-button size="mini" type="success">上传文件</el-button>
-    </el-upload>
+    </el-upload> -->
     <el-table
       :data="tabData"
       element-loading-text="Loading"
@@ -50,13 +58,13 @@
        
     </el-table>
     <!--分页器-->
-    <!-- <pagination
+    <pagination
       v-show="total > 0"
       :total="total"
       :page.sync="getInfoData.offset"
       :limit.sync="getInfoData.limit"
-      @pagination="function(){}"
-    /> -->
+      @pagination="gitList"
+    />
   </div>
 </template>
 
@@ -64,26 +72,37 @@
   import * as XLSX from 'xlsx/xlsx.mjs'
   import commonForm from "@/components/CommonForm";
   import { saveAs } from 'file-saver';
+  import pagination from "@/components/Pagination";
+  import JsonExcel from 'vue-json-excel'
   export default {
     components:{
       commonForm,
+      pagination,
+      JsonExcel
     },
     data() {
       return {
+        json_fields: {
+          "往来帐日期": "往来帐日期",    //常规字段
+          "客户名称": "客户名称", //支持嵌套属性
+          "商品编号": "商品编号",    //常规字段
+          "商品名称": "商品名称",    //常规字段
+          "商品规格": "商品规格",    //常规字段
+          "商品单位": "商品单位",    //常规字段
+          "生产企业名称": "生产企业名称",    //常规字段
+          "商品批号": "商品批号",    //常规字段
+          "数量": "数量",    //常规字段
+          "业务机构群": "业务机构群",    //常规字段
+        },
         tabData:[],
+        alldata:[],
         total:0,
         getInfoData: {
-          limit: 10,
+          limit: 1,
           offset: 1,
-          title:'',
-          startStartTime: "",
-          endStartTime: "",
-          startCreateTime:'',
-          endCreateTime:'',
-          activityStatus:'',
-          validStatus:'',
           startDelTime: [],
-          createDelTime: [],
+          startStartTime:'',
+          endStartTime:'',
         },
         formConfig: {
           formItemList: [
@@ -103,21 +122,21 @@
               name: "搜索",
               value: "primary",
               type: "button",
-              handleClick: function(){},
+              handleClick: this.gitList,
               authBtn: true,
             },
             {
               name: "清空搜索条件",
               value: "",
               type: "button",
-              handleClick: function(){},
+              handleClick: this.clearInput,
               authBtn: true,
             },
             // {
             //   name: "导出Excel",
             //   value: "success",
             //   type: "button",
-            //   handleClick: function(){},
+            //   handleClick: this.saveHandler,
             //   authBtn: true,
             // },
             // {
@@ -131,41 +150,80 @@
         },
       }
     },
-    methods: {
-      saveHandler(){
+    mounted(){
       
-      var content = JSON.stringify(this.tabData);
-      var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-        saveAs(blob, "save.json");
-      },
-      upload (file, fileList) {
-        let files = { 0: file.raw }// 取到File
-        this.readExcel(files)
-      },
-      readExcel (files) { // 表格导入
-        var that = this
-        if (files.length <= 0) { // 如果没有文件名
-          return false
-        } else if (!/\.(xls|xlsx)$/.test(files[0].name.toLowerCase())) {
-          this.$Message.error('上传格式不正确，请上传xls或者xlsx格式')
-          return false
+      this.readWorkbookFromRemoteFile('https://image.ructrip.com/ces001.xlsx');
+    },
+    methods: {
+      clearInput(){
+        this.getInfoData = {
+          limit: 1,
+          offset: 1,
+          startDelTime: [],
+          startStartTime:'',
+          endStartTime:'',
         }
-        const fileReader = new FileReader()
-        fileReader.onload = (ev) => {
-          const data = ev.target.result
-          
-          const workbook = XLSX.read(data, {
-            type: 'binary'
-          })
-          const wsname = workbook.SheetNames[0]// 取第一张表
-          const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname])// 生成json表格内容
-         
-          this.tabData = ws
-          // 重写数据
-          this.$refs.upload.value = ''
+      },
+      readWorkbookFromRemoteFile: function (url) {
+        
+        var xhr = new XMLHttpRequest()
+        xhr.open('get', url, true)
+        xhr.responseType = 'arraybuffer'
+        let _this = this
+        xhr.onload = (e) => {
+          if (xhr.status === 200) {
+            var data = new Uint8Array(xhr.response)
+            
+            const workbook = XLSX.read(data, {
+              type: 'array'
+            })
+            const wsname = workbook.SheetNames[0]// 取第一张表
+            this.alldata= XLSX.utils.sheet_to_json(workbook.Sheets[wsname])// 生成json表格内容
+          console.log(this.alldata);
+          for(let i = 0 ;i<this.alldata.length;i++){
+            this.alldata[i]['往来帐日期'] = this.formatDate(this.alldata[i]['往来帐日期'],'-');
+          }
+            this.tabData = this.alldata.slice(0,1)
+            this.total = this.alldata.length
+            console.log(this.tabData.length);
+
+          }
+          fileReader.readAsBinaryString(files[0])
         }
-        fileReader.readAsBinaryString(files[0])
-      }
+        xhr.send()
+      },
+      gitList(){
+        if(this.getInfoData.startDelTime && this.getInfoData.startDelTime.length > 0){
+          this.getInfoData.startStartTime = this.getInfoData.startDelTime ? this.getInfoData.startDelTime[0] : "";
+          this.getInfoData.endStartTime = this.getInfoData.startDelTime ? this.getInfoData.startDelTime[1] : "";
+          let searchList = [];
+        for(let i = 0;i<this.alldata.length;i++){
+          if(this.getInfoData.startStartTime<=this.alldata[i]['往来帐日期'] && this.alldata[i]['往来帐日期'] <= this.getInfoData.endStartTime){
+            searchList.push(this.alldata[i])
+          }
+        }
+        this.total = searchList.length
+        this.tabData = searchList.slice(this.getInfoData.offset-1*this.getInfoData.limit,this.getInfoData.offset*this.getInfoData.limit)
+        }else{
+          this.tabData = this.alldata.slice(this.getInfoData.offset-1*this.getInfoData.limit,this.getInfoData.offset*this.getInfoData.limit)
+        }
+        // 
+        
+      },
+      formatDate(numb, format) {
+        const old = numb - 1;
+        const t = Math.round((old - Math.floor(old)) * 24 * 60 * 60);
+        const time = new Date(1900, 0, old, 0, 0, t)
+        const year = time.getFullYear() ;
+        const month = time.getMonth() + 1 ;
+        const date = time.getDate() ;
+        return year + format + (month < 10 ? '0' + month : month) + format + (date < 10 ? '0' + date : date)
+      },
+      saveHandler(){
+        var content = JSON.stringify(this.tabData);
+        var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+          saveAs(blob, "save.json");
+      },
     }
   }
 </script>
