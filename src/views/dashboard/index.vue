@@ -1,6 +1,7 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">欢迎: {{ name }}</div>
+    <!-- <div class="dashboard-text">欢迎</div> -->
+    <img class="homePage" src="https://image.ructrip.com/homePage.png" alt="">
   </div>
 </template>
 
@@ -18,6 +19,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.homePage{
+  display: block;
+  width: 688px;
+  height: 695px;
+  margin:50px auto 0;
+}
 .dashboard {
   &-container {
     margin: 30px;

@@ -194,7 +194,20 @@ export const constantRoutes = [
         name: 'userretail',
         component: () => import('@/views/noquanxian.vue'),
         meta: { title: '零售', icon: 'el-icon-film' }
-      }
+      },
+      {
+        path: 'kucun',
+        name: 'userkucun',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '库存', icon: 'el-icon-document-remove' }
+      },
+      {
+        path: 'mxibiao',
+        name: 'usermxibiao',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '退货明细报表', icon: 'el-icon-tickets' }
+      },
+
     ]
   },
   // 404 page must be placed at the end !!!

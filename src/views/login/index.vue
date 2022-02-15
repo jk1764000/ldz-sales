@@ -178,8 +178,15 @@ $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
   .login-container .el-input input {
-    color: $cursor;
+    color: #000;
   }
+  
+}
+.login-container .el-form-item{
+  background: #fff!important;
+}
+input:-internal-autofill-selected{
+  background-color: #fff!important;
 }
 
 /* reset element-ui css */
@@ -195,14 +202,15 @@ $cursor: #fff;
       -webkit-appearance: none;
       border-radius: 0px;
       padding: 12px 5px 12px 15px;
-      color: $light_gray;
+      color: #000;
       height: 47px;
       caret-color: $cursor;
+      background-color:transparent;
 
-      &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px $bg inset !important;
-        -webkit-text-fill-color: $cursor !important;
-      }
+      // &:-webkit-autofill {
+      //   box-shadow: 0 0 0px 1000px $bg inset !important;
+      //   -webkit-text-fill-color: transparent !important;
+      // }
     }
   }
 
@@ -223,7 +231,8 @@ $light_gray:#eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
+  background: url('https://image.ructrip.com/4.jpeg');
+  background-size: 100% 100%;
   overflow: hidden;
 
   .login-form {
