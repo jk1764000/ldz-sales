@@ -172,9 +172,9 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
-$light_gray:#fff;
-$cursor: #fff;
+$bg:#f5f5f5;
+$light_gray:#000;
+$cursor: #000;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
   .login-container .el-input input {
@@ -183,10 +183,10 @@ $cursor: #fff;
   
 }
 .login-container .el-form-item{
-  background: #fff!important;
+  background: $bg!important;
 }
 input:-internal-autofill-selected{
-  background-color: #fff!important;
+  background-color: $bg!important;
 }
 
 /* reset element-ui css */
@@ -207,10 +207,11 @@ input:-internal-autofill-selected{
       caret-color: $cursor;
       background-color:transparent;
 
-      // &:-webkit-autofill {
-      //   box-shadow: 0 0 0px 1000px $bg inset !important;
-      //   -webkit-text-fill-color: transparent !important;
-      // }
+      &:-webkit-autofill {
+        box-shadow: 0 0 0px 1000px $bg inset !important;
+        -webkit-text-fill-color: #000 !important;
+        // color: #000;
+      }
     }
   }
 
