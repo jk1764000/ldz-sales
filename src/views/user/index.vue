@@ -3,6 +3,7 @@
     <commonForm :inline="true" :data="getInfoData" :formConfig="formConfig">
     </commonForm>
     <JsonExcel
+     v-if="total > 0"
       class = "export-excel-wrapper"
       :data = "downloaddata"
       :fields = "json_fields"
@@ -169,9 +170,9 @@
           // for(let i = 0 ;i<this.alldata.length;i++){
           //   this.alldata[i]['往来帐日期'] = this.formatDate(this.alldata[i]['往来帐日期'],'-');
           // }
-            this.downloaddata = this.alldata;
-            this.tabData = this.alldata.slice(0,this.getInfoData.limit)
-            this.total = this.alldata.length
+            // this.downloaddata = this.alldata;
+            // this.tabData = this.alldata.slice(0,this.getInfoData.limit)
+            // this.total = this.alldata.length
             console.log(this.tabData.length);
 
           }
@@ -194,9 +195,9 @@
         this.total = searchList.length
         this.tabData = searchList.slice((this.getInfoData.offset-1)*this.getInfoData.limit,this.getInfoData.offset*this.getInfoData.limit)
         }else{
-          // debugger
-          this.tabData = this.alldata.slice((this.getInfoData.offset-1)*this.getInfoData.limit,this.getInfoData.offset*this.getInfoData.limit)
-          console.log(this.tabData);
+          this.downloaddata = [];
+          this.total = 0
+          this.tabData = []
         }
         // 
         
