@@ -28,30 +28,30 @@
       ></el-table-column>
       <el-table-column
         prop="客户名称"
-        width="120"
+        min-width="120"
         label="客户名称"
       ></el-table-column>
       <el-table-column
         prop="商品编码"
-        min-width="155"
+        width="120"
         label="商品编码"
       ></el-table-column>
       <el-table-column
-        width="130"
+        min-width="130"
         prop="商品名称"
         label="商品名称"
       >
       </el-table-column>
       <el-table-column
         prop="商品规格"
-        width="160"
+        width="120"
         label="商品规格"
       ></el-table-column>
-      <el-table-column prop="商品单位" width="160" label="商品单位"></el-table-column>
-      <el-table-column label="生产企业名称" width="160" prop="生产企业名称"></el-table-column>
-      <el-table-column label="商品批号" width="160" prop="商品批号">
+      <el-table-column prop="商品单位" min-width="130" label="商品单位"></el-table-column>
+      <el-table-column label="生产企业名称" min-width="130" prop="生产企业名称"></el-table-column>
+      <el-table-column label="商品批号" width="120" prop="商品批号">
       </el-table-column>
-      <el-table-column label="数量" width="160" prop="数量">
+      <el-table-column label="数量" width="120" prop="数量">
        
       </el-table-column>
       <el-table-column label="业务机构群" prop="业务机构群"></el-table-column> 
