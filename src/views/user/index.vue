@@ -186,7 +186,7 @@
           let searchList = [];
           // debugger
         for(let i = 0;i<this.alldata.length;i++){
-          if(this.getInfoData.startStartTime<=this.alldata[i]['往来帐日期'] && this.alldata[i]['往来帐日期'] <= this.getInfoData.endStartTime){
+          if(this.getInfoData.startStartTime<=this.alldata[i]['往来帐日期'] && this.alldata[i]['往来帐日期'] < this.getInfoData.endStartTime){
             searchList.push(this.alldata[i])
           }
         }
