@@ -55,17 +55,145 @@ export const constantRoutes = [
     }]
   },
   {
+    path: '/system/',
+    component: Layout,
+    name: "systemManger",
+    meta: { title: '系统管理', icon: 'el-icon-s-tools' },
+    children: [
+      {
+        path: 'index',
+        name: 'systemindex',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '企业基本信息设置', icon: 'el-icon-monitor' }
+      }
+    ],
+  },
+  {
+    path: '/shop/',
+    component: Layout,
+    name: "shopManger",
+    meta: { title: '供应商自营', icon: 'el-icon-s-check' },
+    children: [
+      {
+        path: 'index',
+        name: 'shopindex',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '供应商首营（药品）', icon: 'el-icon-user' }
+      },
+      {
+        path: 'indexname',
+        name: 'shopindexname',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '供应商首营（器械）', icon: 'el-icon-user-solid' }
+      },
+    ],
+  },
+  {
+    path: '/shopping/',
+    component: Layout,
+    name: "shoppingManger",
+    meta: { title: '商品首营', icon: 'el-icon-present' },
+    children: [
+      {
+        path: 'index',
+        name: 'shoppingindex',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '首营商品（药品）', icon: 'el-icon-box' }
+      },
+      {
+        path: 'indexname',
+        name: 'shoppingindexname',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '商品首营（器械）', icon: 'el-icon-sold-out' }
+      },
+    ],
+  },
+  {
+    path: '/shopgo/',
+    component: Layout,
+    name: "shopgoManger",
+    meta: { title: '供应商拜访', icon: 'el-icon-s-tools' },
+    children: [
+      {
+        path: 'index',
+        name: 'shopgoindex',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '预约拜访（供应商）', icon: 'el-icon-user-solid' }
+      },
+    ],
+  },
+  {
+    path: '/shoppingPush/',
+    component: Layout,
+    name: "shoppingPushManger",
+    meta: { title: '商品信息推送', icon: 'el-icon-message-solid' },
+    children: [
+      {
+        path: 'index',
+        name: 'shoppingPushindex',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '新品信息推送', icon: 'el-icon-message-solid' }
+      },
+    ],
+  },
+  {
+    path: '/shoppingsource/',
+    component: Layout,
+    name: "shoppingsourceManger",
+    meta: { title: '寻源协同', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'index',
+        name: 'shoppingsourceindex',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '询价单管理', icon: 'dashboard' }
+      },
+      {
+        path: 'zhaobiao',
+        name: 'shoppingsourcezhaobiao',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '销售方招标管理', icon: 'dashboard' }
+      },
+    ],
+  },
+  {
+    path: '/back/',
+    component: Layout,
+    name: "backManger",
+    meta: { title: '返利管理', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'index',
+        name: 'backindex',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '返利结果管理', icon: 'dashboard' }
+      }
+    ],
+  },
+  {
     path: '/user/',
     component: Layout,
     redirect: '/user/index',
     name: 'memberMange',
-    meta: { title: '用户管理', icon: 'el-icon-s-help' },
+    meta: { title: '报表管理', icon: 'el-icon-coin' },
     children: [
       {
         path: 'index',
         name: 'userindex',
         component: () => import('@/views/user/index.vue'),
-        meta: { title: '用户列表', icon: 'el-icon-s-help' }
+        meta: { title: '销售退货', icon: 'table' }
+      },
+      {
+        path: 'pull',
+        name: 'userpull',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '入库退货', icon: 'el-icon-folder' }
+      },
+      {
+        path: 'retail',
+        name: 'userretail',
+        component: () => import('@/views/noquanxian.vue'),
+        meta: { title: '零售', icon: 'el-icon-film' }
       }
     ]
   },
