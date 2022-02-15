@@ -4,7 +4,7 @@
     </commonForm>
     <JsonExcel
       class = "export-excel-wrapper"
-      :data = "tabData"
+      :data = "downloaddata"
       :fields = "json_fields"
       name = "销售退货.xls">
       <!-- 上面可以自定义自己的样式，还可以引用其他组件button -->
@@ -32,9 +32,9 @@
         label="客户名称"
       ></el-table-column>
       <el-table-column
-        prop="商品编号"
+        prop="商品编码"
         min-width="155"
-        label="商品编号"
+        label="商品编码"
       ></el-table-column>
       <el-table-column
         width="130"
@@ -85,7 +85,7 @@
         json_fields: {
           "往来帐日期": "往来帐日期",    //常规字段
           "客户名称": "客户名称", //支持嵌套属性
-          "商品编号": "商品编号",    //常规字段
+          "商品编码": "商品编码",    //常规字段
           "商品名称": "商品名称",    //常规字段
           "商品规格": "商品规格",    //常规字段
           "商品单位": "商品单位",    //常规字段
@@ -96,6 +96,7 @@
         },
         tabData:[],
         alldata:[],
+        downloaddata:[],
         total:0,
         getInfoData: {
           limit: 10,
@@ -132,27 +133,12 @@
               handleClick: this.clearInput,
               authBtn: true,
             },
-            // {
-            //   name: "导出Excel",
-            //   value: "success",
-            //   type: "button",
-            //   handleClick: this.saveHandler,
-            //   authBtn: true,
-            // },
-            // {
-            //   name: "导入Excel",
-            //   value: "success",
-            //   type: "button",
-            //   handleClick: function(){},
-            //   authBtn: true,
-            // },
           ],
         },
       }
     },
     mounted(){
-      
-      this.readWorkbookFromRemoteFile('https://image.ructrip.com/ces001.xlsx');
+      this.readWorkbookFromRemoteFile('https://image.ructrip.com/12月配送.xls');
     },
     methods: {
       clearInput(){
@@ -179,10 +165,11 @@
             })
             const wsname = workbook.SheetNames[0]// 取第一张表
             this.alldata= XLSX.utils.sheet_to_json(workbook.Sheets[wsname])// 生成json表格内容
-          console.log(this.alldata);
-          for(let i = 0 ;i<this.alldata.length;i++){
-            this.alldata[i]['往来帐日期'] = this.formatDate(this.alldata[i]['往来帐日期'],'-');
-          }
+           console.log(this.alldata);
+          // for(let i = 0 ;i<this.alldata.length;i++){
+          //   this.alldata[i]['往来帐日期'] = this.formatDate(this.alldata[i]['往来帐日期'],'-');
+          // }
+            this.downloaddata = this.alldata;
             this.tabData = this.alldata.slice(0,this.getInfoData.limit)
             this.total = this.alldata.length
             console.log(this.tabData.length);
@@ -197,15 +184,19 @@
           this.getInfoData.startStartTime = this.getInfoData.startDelTime ? this.getInfoData.startDelTime[0] : "";
           this.getInfoData.endStartTime = this.getInfoData.startDelTime ? this.getInfoData.startDelTime[1] : "";
           let searchList = [];
+          // debugger
         for(let i = 0;i<this.alldata.length;i++){
           if(this.getInfoData.startStartTime<=this.alldata[i]['往来帐日期'] && this.alldata[i]['往来帐日期'] <= this.getInfoData.endStartTime){
             searchList.push(this.alldata[i])
           }
         }
+        this.downloaddata = searchList;
         this.total = searchList.length
-        this.tabData = searchList.slice(this.getInfoData.offset-1*this.getInfoData.limit,this.getInfoData.offset*this.getInfoData.limit)
+        this.tabData = searchList.slice((this.getInfoData.offset-1)*this.getInfoData.limit,this.getInfoData.offset*this.getInfoData.limit)
         }else{
-          this.tabData = this.alldata.slice(this.getInfoData.offset-1*this.getInfoData.limit,this.getInfoData.offset*this.getInfoData.limit)
+          // debugger
+          this.tabData = this.alldata.slice((this.getInfoData.offset-1)*this.getInfoData.limit,this.getInfoData.offset*this.getInfoData.limit)
+          console.log(this.tabData);
         }
         // 
         
