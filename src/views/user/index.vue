@@ -139,7 +139,7 @@
       }
     },
     mounted(){
-      this.readWorkbookFromRemoteFile('https://image.ructrip.com/12月配送.xls');
+      this.readWorkbookFromRemoteFile('https://wwwswkcom.github.io/yanxitang-data/销售退货表.xls');
     },
     methods: {
       clearInput(){
