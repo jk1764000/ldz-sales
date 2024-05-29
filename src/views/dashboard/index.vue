@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-container">
     <!-- <div class="dashboard-text">欢迎</div> -->
-    <img class="homePage" src="https://image.ructrip.com/homePage.png" alt="">
+    <img class="homePage" src="https://srm.sdyanxitang.com/ELSServer_YXT/images/homePage.png" alt="">
   </div>
 </template>
 
