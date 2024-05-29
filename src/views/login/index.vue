@@ -232,7 +232,7 @@ $light_gray:#eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background: url('https://image.ructrip.com/4.jpeg');
+  background: url('https://srm.sdyanxitang.com/ELSServer_YXT/login/images/backgrounds/4.jpg');
   background-size: 100% 100%;
   overflow: hidden;
 
