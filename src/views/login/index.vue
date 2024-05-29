@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <img src="login/images/els-logo.png" style="height:95%;text-align:center">
+    <img src="https://srm.sdyanxitang.com/ELSServer_YXT/login/images/els-logo.png" style="height:95%;text-align:center">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
