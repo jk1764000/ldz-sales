@@ -1,6 +1,6 @@
 <template>
-  <div class="box container">
-    <div class="login-container">
+  <div class="container">
+    <div class="box login-container">
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on"
                label-position="left">
 
@@ -298,8 +298,11 @@ $light_gray: #eee;
   }
 }
 </style>
-<style>
 
+<style>
+/**
+logo
+ */
 .login_logo {
   margin: 10px 0 10px 5%;
   margin-top: 10px;
@@ -310,9 +313,7 @@ $light_gray: #eee;
   float: left;
   width: 80%;
 }
-</style>
 
-<style>
 /* 定义外部容器 */
 .container {
   position: relative;

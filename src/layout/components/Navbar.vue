@@ -1,6 +1,9 @@
 <template>
   <div class="navbar">
-    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
+<!--    <div class="left-logo">-->
+<!--      <img src="https://srm.sdyanxitang.com/ELSServer_YXT/login/images/els-logo.png">-->
+<!--    </div>-->
+<!--    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />-->
 
     <breadcrumb class="breadcrumb-container" />
 
@@ -67,7 +70,7 @@ export default {
   height: 50px;
   overflow: hidden;
   position: relative;
-  background: #fff;
+  background: white;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
 
   .hamburger-container {
@@ -138,5 +141,9 @@ export default {
       }
     }
   }
+}
+.left-logo {
+  height: 80%;
+  float: left;
 }
 </style>
