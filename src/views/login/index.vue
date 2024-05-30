@@ -1,6 +1,8 @@
 <template>
+  <div class="login_logo">
+    <img src="https://srm.sdyanxitang.com/ELSServer_YXT/login/images/els-logo.png">
+  </div>
   <div class="login-container">
-    <img src="https://srm.sdyanxitang.com/ELSServer_YXT/login/images/els-logo.png" style="height:95%;text-align:center">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
@@ -287,5 +289,18 @@ $light_gray:#eee;
     cursor: pointer;
     user-select: none;
   }
+}
+</style>
+<style>
+
+.login_logo {
+    margin: 10px 0 10px 5%;
+    margin-top: 10px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    margin-left: 5%;
+    height: 50px;
+    float: left;
+    width: 80%;
 }
 </style>
