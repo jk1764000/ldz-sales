@@ -1,77 +1,82 @@
 <template>
-  <div class="login_logo">
-    <img src="https://srm.sdyanxitang.com/ELSServer_YXT/login/images/els-logo.png">
-  </div>
-  <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+  <div class="box container">
+    <div class="login-container">
+      <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on"
+               label-position="left">
 
-      <div class="title-container">
-        <h3 class="title">后台登录</h3>
-      </div>
+        <div class="title-container">
+          <h3 class="title">后台登录</h3>
+        </div>
 
-      <el-form-item prop="loginname">
+        <el-form-item prop="loginname">
         <span class="svg-container">
-          <svg-icon icon-class="user" />
+          <svg-icon icon-class="user"/>
         </span>
-        <el-input
-          ref="loginname"
-          v-model="loginForm.loginname"
-          placeholder="请输入企业账号"
-          name="loginname"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
-      </el-form-item>
-      <el-form-item prop="loginperson">
+          <el-input
+              ref="loginname"
+              v-model="loginForm.loginname"
+              placeholder="请输入企业账号"
+              name="loginname"
+              type="text"
+              tabindex="1"
+              auto-complete="on"
+          />
+        </el-form-item>
+        <el-form-item prop="loginperson">
         <span class="svg-container">
-          <svg-icon icon-class="user" />
+          <svg-icon icon-class="user"/>
         </span>
-        <el-input
-          ref="loginperson"
-          v-model="loginForm.loginperson"
-          placeholder="请输入个人账号"
-          name="loginperson"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
-      </el-form-item>
-      <el-form-item prop="password">
+          <el-input
+              ref="loginperson"
+              v-model="loginForm.loginperson"
+              placeholder="请输入个人账号"
+              name="loginperson"
+              type="text"
+              tabindex="1"
+              auto-complete="on"
+          />
+        </el-form-item>
+        <el-form-item prop="password">
         <span class="svg-container">
-          <svg-icon icon-class="password" />
+          <svg-icon icon-class="password"/>
         </span>
-        <el-input
-          :key="passwordType"
-          ref="password"
-          v-model="loginForm.password"
-          :type="passwordType"
-          placeholder="请输入密码"
-          name="password"
-          tabindex="2"
-          auto-complete="on"
-          @keyup.enter.native="handleLogin"
-        />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+          <el-input
+              :key="passwordType"
+              ref="password"
+              v-model="loginForm.password"
+              :type="passwordType"
+              placeholder="请输入密码"
+              name="password"
+              tabindex="2"
+              auto-complete="on"
+              @keyup.enter.native="handleLogin"
+          />
+          <span class="show-pwd" @click="showPwd">
+          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/>
         </span>
-      </el-form-item>
+        </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
+        <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;"
+                   @click.native.prevent="handleLogin">登录
+        </el-button>
 
-      <!-- <div class="tips">
-        <span style="margin-right:20px;">loginname: admin</span>
-        <span> password: any</span>
-      </div> -->
+        <!-- <div class="tips">
+          <span style="margin-right:20px;">loginname: admin</span>
+          <span> password: any</span>
+        </div> -->
 
-    </el-form>
+      </el-form>
+    </div>
+    <div class="box login_logo">
+      <img src="https://srm.sdyanxitang.com/ELSServer_YXT/login/images/els-logo.png">
+    </div>
   </div>
 </template>
 
 <script>
 // import { validUsername } from '@/utils/validate'
 // import {login} from "@/api/user"
-import { setToken } from '@/utils/auth'
+import {setToken} from '@/utils/auth'
 
 export default {
   name: 'Login',
@@ -82,7 +87,7 @@ export default {
     const validateLoginperson = (rule, value, callback) => {
       callback()
     }
-    
+
     const validatePassword = (rule, value, callback) => {
       if (value.length < 4) {
         callback(new Error('密码输入错误'))
@@ -94,12 +99,12 @@ export default {
       loginForm: {
         loginname: '',
         password: '',
-        loginperson:'',
+        loginperson: '',
       },
       loginRules: {
-        loginname: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }],
-        loginperson:[{ required: true, trigger: 'blur', validator: validateUsername }],
+        loginname: [{required: true, trigger: 'blur', validator: validateUsername}],
+        password: [{required: true, trigger: 'blur', validator: validatePassword}],
+        loginperson: [{required: true, trigger: 'blur', validator: validateUsername}],
       },
       loading: false,
       passwordType: 'password',
@@ -108,7 +113,7 @@ export default {
   },
   watch: {
     $route: {
-      handler: function(route) {
+      handler: function (route) {
         this.redirect = route.query && route.query.redirect
       },
       immediate: true
@@ -129,30 +134,30 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          if(this.loginForm.loginname == "307814"){
-            if((this.loginForm.loginperson == '0' && this.loginForm.password =="sw123") || this.loginForm.loginperson == '1' && this.loginForm.password =="sw246"){
+          if (this.loginForm.loginname == "307814") {
+            if ((this.loginForm.loginperson == '0' && this.loginForm.password == "sw123") || this.loginForm.loginperson == '1' && this.loginForm.password == "sw246") {
               this.loading = false
               setToken('1111');
-              sessionStorage.setItem('ldzloginname',this.loginForm.loginname);
-              sessionStorage.setItem('loginperson',this.loginForm.loginperson);
-              this.$router.push({ path: this.redirect || '/' })
-              
-            }else{
+              sessionStorage.setItem('ldzloginname', this.loginForm.loginname);
+              sessionStorage.setItem('loginperson', this.loginForm.loginperson);
+              this.$router.push({path: this.redirect || '/'})
+
+            } else {
               this.loading = false
               this.$message({
                 message: '个人账号或密码错误',
                 type: 'error'
               });
             }
-            
-          }else{
+
+          } else {
             this.loading = false
             this.$message({
               message: '企业账号错误',
               type: 'error'
             });
           }
-          
+
 
           // login(this.loginForm).then((res)=>{
           //   if(res.code == "0"){
@@ -175,21 +180,23 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#f5f5f5;
-$light_gray:#000;
+$bg: #f5f5f5;
+$light_gray: #000;
 $cursor: #000;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
   .login-container .el-input input {
     color: #000;
   }
-  
+
 }
-.login-container .el-form-item{
-  background: $bg!important;
+
+.login-container .el-form-item {
+  background: $bg !important;
 }
-input:-internal-autofill-selected{
-  background-color: $bg!important;
+
+input:-internal-autofill-selected {
+  background-color: $bg !important;
 }
 
 /* reset element-ui css */
@@ -208,7 +215,7 @@ input:-internal-autofill-selected{
       color: #000;
       height: 47px;
       caret-color: $cursor;
-      background-color:transparent;
+      background-color: transparent;
 
       &:-webkit-autofill {
         box-shadow: 0 0 0px 1000px $bg inset !important;
@@ -228,9 +235,9 @@ input:-internal-autofill-selected{
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#eee;
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
+$light_gray: #eee;
 
 .login-container {
   min-height: 100%;
@@ -294,13 +301,27 @@ $light_gray:#eee;
 <style>
 
 .login_logo {
-    margin: 10px 0 10px 5%;
-    margin-top: 10px;
-    margin-right: 0px;
-    margin-bottom: 10px;
-    margin-left: 5%;
-    height: 50px;
-    float: left;
-    width: 80%;
+  margin: 10px 0 10px 5%;
+  margin-top: 10px;
+  margin-right: 0px;
+  margin-bottom: 10px;
+  margin-left: 5%;
+  height: 50px;
+  float: left;
+  width: 80%;
+}
+</style>
+
+<style>
+/* 定义外部容器 */
+.container {
+  position: relative;
+  min-height: 100%;
+  width: 100%;
+}
+
+/* 定义要重叠的元素 */
+.box {
+  position: absolute;
 }
 </style>
