@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Vue Admin Template',
+  title: '燕喜堂SRM系统',
 
   /**
    * @type {boolean} true | false
