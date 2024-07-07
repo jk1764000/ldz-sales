@@ -4,7 +4,7 @@
 <!--      <img src="https://srm.sdyanxitang.com/ELSServer_YXT/login/images/els-logo.png">-->
 <!--    </div>-->
 <!--    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />-->
-
+<!--    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />-->
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">

@@ -192,7 +192,7 @@ export const constantRoutes = [
       {
         path: 'retail',
         name: 'userretail',
-        component: () => import('@/views/noquanxian.vue'),
+        component: () => import('@/views/lingshou/index.vue'),
         meta: { title: '零售', icon: 'el-icon-film' }
       },
       {
