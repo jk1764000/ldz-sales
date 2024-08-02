@@ -33,11 +33,6 @@
           label="门店名称"
       />
       <el-table-column
-          prop="业务机构群"
-          width="120"
-          label="业务机构群"
-      />
-      <el-table-column
           min-width="80"
           prop="商品编码"
           label="商品编码"
@@ -56,8 +51,6 @@
       <el-table-column label="商品批号" width="100" prop="商品批号"/>
       <el-table-column prop="商品单位" min-width="50" label="商品单位"/>
       <el-table-column label="销售数量" width="80" prop="销售数量"/>
-      <el-table-column label="标价金额" width="120" prop="标价金额"/>
-      <el-table-column label="实际销售金额" prop="实际销售金额"/>
 
     </el-table>
     <!--分页器-->
@@ -191,7 +184,7 @@ export default {
         let searchList = [];
         // debugger
         for(let i = 0;i<this.alldata.length;i++){
-          if(this.getInfoData.startStartTime<=this.alldata[i]['会计日'] && this.alldata[i]['会计日'] < this.getInfoData.endStartTime){
+          if(this.getInfoData.startStartTime<=this.alldata[i]['会计日'] && this.alldata[i]['会计日'] <= this.getInfoData.endStartTime){
             searchList.push(this.alldata[i])
           }
         }
