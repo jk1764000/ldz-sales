@@ -45,18 +45,16 @@
       </el-table-column>
       <el-table-column
         prop="商品规格"
-        width="120"
+        width="100"
         label="商品规格"
       ></el-table-column>
-      <el-table-column prop="商品单位" min-width="130" label="商品单位"></el-table-column>
-      <el-table-column label="生产企业名称" min-width="130" prop="生产企业名称"></el-table-column>
+      <el-table-column prop="商品单位" min-width="100" label="商品单位"></el-table-column>
+      <el-table-column label="生产企业名称" min-width="150" prop="生产企业名称"></el-table-column>
       <el-table-column label="商品批号" width="120" prop="商品批号">
       </el-table-column>
-      <el-table-column label="数量" width="120" prop="数量">
-       
+      <el-table-column label="数量" width="100" prop="数量">
       </el-table-column>
-      <el-table-column label="业务机构群" prop="业务机构群"></el-table-column> 
-       
+
     </el-table>
     <!--分页器-->
     <pagination
@@ -187,7 +185,7 @@
           let searchList = [];
           // debugger
         for(let i = 0;i<this.alldata.length;i++){
-          if(this.getInfoData.startStartTime<=this.alldata[i]['往来帐日期'] && this.alldata[i]['往来帐日期'] < this.getInfoData.endStartTime){
+          if(this.getInfoData.startStartTime<=this.alldata[i]['往来帐日期'] && this.alldata[i]['往来帐日期'] <= this.getInfoData.endStartTime){
             searchList.push(this.alldata[i])
           }
         }
