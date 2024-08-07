@@ -198,7 +198,7 @@ export const constantRoutes = [
       {
         path: 'kucun',
         name: 'userkucun',
-        component: () => import('@/views/noquanxian.vue'),
+        component: () => import('@/views/kucun/index.vue'),
         meta: { title: '库存', icon: 'el-icon-document-remove' }
       },
       {
