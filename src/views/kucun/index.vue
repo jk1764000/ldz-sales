@@ -151,9 +151,7 @@ export default {
       xhr.send()
     },
     gitList(){
-      if(this.getInfoData.startDelTime && this.getInfoData.startDelTime.length > 0){
-        this.getInfoData.startStartTime = this.getInfoData.startDelTime ? this.getInfoData.startDelTime[0] : "";
-        this.getInfoData.endStartTime = this.getInfoData.startDelTime ? this.getInfoData.startDelTime[1] : "";
+      if(this.alldata){
         // let searchList = [];
         // debugger
         // for(let i = 0;i<this.alldata.length;i++){
